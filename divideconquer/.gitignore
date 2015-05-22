@@ -1,7 +1,5 @@
 # Created by https://www.gitignore.io
 
-#!! ERROR: eclipse java is undefined. Use list command to see defined gitignore types !!#
-
 ### Eclipse ###
 *.pydevproject
 .metadata
