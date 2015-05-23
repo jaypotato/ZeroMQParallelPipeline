@@ -18,7 +18,7 @@ public class Ventilator {
 		ZMQ.Socket sink = context.socket(ZMQ.PUSH);
 		sink.connect("tcp://localhost:5558");
 
-		System.out.println("Press Enter when the workers are ready: ");
+		System.out.println("Press [Enter] when the workers are ready: ");
 		System.in.read();
 		System.out.println("Sending tasks to workers\n");
 
@@ -66,7 +66,7 @@ public class Ventilator {
 			// Printing message reply as log
 			System.out.println("length of byte array: " + images.length);
 			System.out.println("length of file: " + sendFile.length() + " bytes");
-			System.out.println(fileNumber + ". " + fileName + " is sended succesfully\n");
+			System.out.println(fileNumber + ". " + fileName + " has been sent succesfully\n");
 		}
 
 		Thread.sleep(1000); 
