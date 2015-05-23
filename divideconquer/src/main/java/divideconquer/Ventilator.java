@@ -1,10 +1,8 @@
 package divideconquer;
 
-import java.util.Random;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 
 import javax.imageio.ImageIO;
 
@@ -26,30 +24,49 @@ public class Ventilator {
 
 		sink.send("0", 0);
 
-		String pathStr = "D:/Fathur/Kuliah/Semester 6/Sistem Terdistribusi/sister dataset";
-		File path = new File(pathStr);
+		// Full image file path
+		String imagePath = "F:/ITS/Teknik Informatika/Semester_6/Sistem Terdistribusi/sister-dataset";
+		File path = new File(imagePath);
+		
+		// File list
 		String[] files = path.list();
-		int numFiles = files.length;
-		byte[] byteArr;
-	
+		
+		// Number of files
+		int numOfFiles = files.length;
+		
+		// Initialize byte array for image
+		byte[] images;
 
-		for (int i = 0; i < numFiles; i++) {
+		for (int i = 0; i < numOfFiles; i++) {
+			// Image file will send to worker
+			String fileIndex = files[i];
+			File sendFile = new File(imagePath + "/" + fileIndex);
+			
+			// Using regex to remove file extensions
+        	String fileName = fileIndex.replaceFirst("[.][^.]+$", "");
+        	
+        	// Get file extesions
+        	String fileExtension = fileIndex.substring(fileIndex.lastIndexOf('.')+1);
+        	
+			System.out.println("transfering " + fileIndex);
 
-			String fileName = files[i];
-			File sentFile = new File(pathStr + "/" + fileName);
-			System.out.println("transfering " + fileName);
-
-			BufferedImage img = ImageIO.read(sentFile);
+			BufferedImage img = ImageIO.read(sendFile);
 			
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			ImageIO.write(img, "png", baos);
-			byteArr = new byte[ (baos.size())];
-			byteArr = baos.toByteArray();
+			ImageIO.write(img, fileExtension, baos);
+			images = new byte[baos.size()];
+			images = baos.toByteArray();
 	
-			sender.send(byteArr);
-			System.out.println("byteArr : " + byteArr.length);
-			System.out.println("sentFile : " + sentFile.length());
-			System.out.println("Finished sending " + i+1 + ". " + fileName);
+			sender.send(fileName);
+			sender.send(fileExtension);
+			sender.send(images);
+			
+			int fileNumber = i + 1;
+			
+			// Printing message reply as log
+			System.out.println("Ukuran byte array: " + images.length);
+			System.out.println("Ukuran file: " + sendFile.length());
+			System.out.println(fileNumber + ". " + fileName + " berhasil dikirim\n");
 		}
 
 		Thread.sleep(1000); 
