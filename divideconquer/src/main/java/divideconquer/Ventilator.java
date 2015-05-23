@@ -25,7 +25,7 @@ public class Ventilator {
 		sink.send("0", 0);
 
 		// Full image file path
-		String imagePath = "F:/ITS/Teknik Informatika/Semester_6/Sistem Terdistribusi/sister-dataset";
+		String imagePath = "your/full/image/path";
 		File path = new File(imagePath);
 		
 		// File list
@@ -64,9 +64,9 @@ public class Ventilator {
 			int fileNumber = i + 1;
 			
 			// Printing message reply as log
-			System.out.println("Ukuran byte array: " + images.length);
-			System.out.println("Ukuran file: " + sendFile.length());
-			System.out.println(fileNumber + ". " + fileName + " berhasil dikirim\n");
+			System.out.println("length of byte array: " + images.length);
+			System.out.println("length of file: " + sendFile.length() + " bytes");
+			System.out.println(fileNumber + ". " + fileName + " is sended succesfully\n");
 		}
 
 		Thread.sleep(1000); 

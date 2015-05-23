@@ -10,7 +10,6 @@ import org.zeromq.ZMQ;
 
 public class Sinker {
 	public static void main(String[] args) throws Exception {
-
 		long Start = System.currentTimeMillis();
 		ZMQ.Context context = ZMQ.context(1);
 		ZMQ.Socket receiver = context.socket(ZMQ.PULL);
@@ -29,7 +28,7 @@ public class Sinker {
 			byte[] imageOut = receiver.recv();
 			
 			BufferedImage image = ImageIO.read(new ByteArrayInputStream(imageOut));
-			String pathNewFile = "F:/ITS/Teknik Informatika/Semester_6/Sistem Terdistribusi/rgbgray-data/";
+			String pathNewFile = "your/full/new/image/path";
 			
 			File destinationPath = new File(pathNewFile + fileNumber + "_" + fileName + "_grayscale." + fileExtensions);
 
@@ -42,6 +41,6 @@ public class Sinker {
 		long Stop = System.currentTimeMillis();
 		long Elapsed = Stop - Start;
 		
-		System.out.println("total time : " + Elapsed + "miliseconds");
+		System.out.println("total time: " + Elapsed + " miliseconds");
 	}
 }
