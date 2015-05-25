@@ -18,14 +18,14 @@ public class Ventilator {
 		ZMQ.Socket sink = context.socket(ZMQ.PUSH);
 		sink.connect("tcp://localhost:5558");
 
-		System.out.println("Press Enter when the workers are ready: ");
+		System.out.println("Press [Enter] when the workers are ready: ");
 		System.in.read();
 		System.out.println("Sending tasks to workers\n");
 
 		sink.send("0", 0);
 
 		// Full image file path
-		String imagePath = "F:/ITS/Teknik Informatika/Semester_6/Sistem Terdistribusi/sister-dataset";
+		String imagePath = "your/full/image/path";
 		File path = new File(imagePath);
 		
 		// File list
@@ -64,9 +64,9 @@ public class Ventilator {
 			int fileNumber = i + 1;
 			
 			// Printing message reply as log
-			System.out.println("Ukuran byte array: " + images.length);
-			System.out.println("Ukuran file: " + sendFile.length());
-			System.out.println(fileNumber + ". " + fileName + " berhasil dikirim\n");
+			System.out.println("length of byte array: " + images.length);
+			System.out.println("length of file: " + sendFile.length() + " bytes");
+			System.out.println(fileNumber + ". " + fileName + " has been sent succesfully\n");
 		}
 
 		Thread.sleep(1000); 
